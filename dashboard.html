@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr"><head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="generator" content="Joomla! - Open Source Content Management">
+	<title>Testing Admin - Administration - Control Panel</title>
+	<link href="/administrator/templates/isis/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+	<link rel="stylesheet" href="assets/css/template.css" type="text/css">
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-noconflict.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-migrate.min.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/template.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		
+		jQuery(document).ready(function(){
+			jQuery('.hasTooltip').tooltip({"html": true,"container": "body"});
+		});
+	</script>
+	
+	
+	<!-- Template color -->
+	<!-- Template header color -->
+	
+	<!-- Sidebar background color -->
+	
+	<!--[if lt IE 9]>
+	<script src="../media/jui/js/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body class="admin com_cpanel view- layout- task- itemid-" data-spy="scroll" data-target=".subhead" data-offset="87">
+<!-- Top Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="admin-logo" href="/administrator"><span class="icon-joomla"></span></a>
+			<a class="brand hidden-desktop hidden-tablet" href="http://localjoomla/" title="Preview Testing Admin" target="_blank">Testing Admin <span class="icon-out-2 small"></span></a>
+			
+			<div class="nav-collapse">
+				<ul id="menu" class="nav ">
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">System <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="menu-cpanel" href="#">Control Panel</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-config" href="#">Global Configuration</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-checkin" href="#">Global Check-in</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-clear" href="#">Clear Cache</a></li>
+							<li><a class="menu-purge" href="#">Purge Expired Cache</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-info" href="#">System Information</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-user" data-toggle="dropdown" href="index.php?option=com_users&amp;view=users">User Manager</a>
+								<ul id="menu-com-users-users" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_users&amp;task=user.add">Add New User</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-groups" data-toggle="dropdown" href="index.php?option=com_users&amp;view=groups">Groups</a>
+								<ul id="menu-com-users-groups" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_users&amp;task=group.add">Add New Group</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-levels" data-toggle="dropdown" href="index.php?option=com_users&amp;view=levels">Access Levels</a>
+								<ul id="menu-com-users-levels" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_users&amp;task=level.add">Add New Access Level</a></li>
+								</ul>
+							</li>
+							<li class="divider"><span></span></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-user-note" data-toggle="dropdown" href="index.php?option=com_users&amp;view=notes">User Notes</a>
+								<ul id="menu-com-users-notes" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_users&amp;task=note.add">Add User Note</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-category" data-toggle="dropdown" href="index.php?option=com_categories&amp;view=categories&amp;extension=com_users">User Note Categories</a>
+								<ul id="menu-com-categories-categories-com-users" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_categories&amp;task=category.add&amp;extension=com_users">Add New Category</a></li>
+								</ul>
+							</li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-massmail" href="index.php?option=com_users&amp;view=mail">Mass Mail Users</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menus <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menumgr" data-toggle="dropdown" href="index.php?option=com_menus&amp;view=menus">Menu Manager</a>
+								<ul id="menu-com-menus-menus" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_menus&amp;view=menu&amp;layout=edit">Add New Menu</a></li>
+								</ul>
+							</li>
+							<li class="divider"><span></span></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menu" data-toggle="dropdown" href="index.php?option=com_menus&amp;view=items&amp;menutype=mainmenu">Main Menu <i class="icon-home"></i></a>
+								<ul id="menu-com-menus-items-mainmenu" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_menus&amp;view=item&amp;layout=edit&amp;menutype=mainmenu">Add New Menu Item</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menu" data-toggle="dropdown" href="index.php?option=com_menus&amp;view=items&amp;menutype=authormenu">Author Menu</a>
+								<ul id="menu-com-menus-items-authormenu" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_menus&amp;view=item&amp;layout=edit&amp;menutype=authormenu">Add New Menu Item</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menu" data-toggle="dropdown" href="index.php?option=com_menus&amp;view=items&amp;menutype=bottommenu">Bottom Menu</a>
+								<ul id="menu-com-menus-items-bottommenu" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_menus&amp;view=item&amp;layout=edit&amp;menutype=bottommenu">Add New Menu Item</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Content <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-article" data-toggle="dropdown" href="index.php?option=com_content">Article Manager</a>
+								<ul id="menu-com-content" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_content&amp;task=article.add">Add New Article</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-category" data-toggle="dropdown" href="index.php?option=com_categories&amp;extension=com_content">Category Manager</a>
+								<ul id="menu-com-categories-com-content" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="index.php?option=com_categories&amp;task=category.add&amp;extension=com_content">Add New Category</a></li>
+								</ul>
+							</li>
+							<li><a class="menu-featured" href="index.php?option=com_content&amp;view=featured">Featured Articles</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-media" href="index.php?option=com_media">Media Manager</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Components <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-banners" data-toggle="dropdown" href="index.php?option=com_banners">Banners</a>
+								<ul id="menu-com-banners" class="dropdown-menu menu-component">
+									<li><a class="menu-banners" href="index.php?option=com_banners">Banners</a></li>
+									<li><a class="menu-banners-cat" href="index.php?option=com_categories&amp;extension=com_banners">Categories</a></li>
+									<li><a class="menu-banners-clients" href="index.php?option=com_banners&amp;view=clients">Clients</a></li>
+									<li><a class="menu-banners-tracks" href="index.php?option=com_banners&amp;view=tracks">Tracks</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-contact" data-toggle="dropdown" href="index.php?option=com_contact">Contacts</a>
+								<ul id="menu-com-contact" class="dropdown-menu menu-component">
+									<li><a class="menu-contact" href="index.php?option=com_contact">Contacts</a></li>
+									<li><a class="menu-contact-cat" href="index.php?option=com_categories&amp;extension=com_contact">Categories</a></li>
+								</ul>
+							</li>
+							<li><a class="menu-joomlaupdate" href="index.php?option=com_joomlaupdate">Joomla! Update</a></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-messages" data-toggle="dropdown" href="index.php?option=com_messages">Messaging</a>
+								<ul id="menu-com-messages" class="dropdown-menu menu-component">
+									<li><a class="menu-messages-add" href="index.php?option=com_messages&amp;task=message.add">New Private Message</a></li>
+									<li><a class="menu-messages-read" href="index.php?option=com_messages">Read Private Messages</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-newsfeeds" data-toggle="dropdown" href="index.php?option=com_newsfeeds">Newsfeeds</a>
+								<ul id="menu-com-newsfeeds" class="dropdown-menu menu-component">
+									<li><a class="menu-newsfeeds" href="index.php?option=com_newsfeeds">Feeds</a></li>
+									<li><a class="menu-newsfeeds-cat" href="index.php?option=com_categories&amp;extension=com_newsfeeds">Categories</a></li>
+								</ul>
+							</li>
+							<li><a class="menu-postinstall" href="index.php?option=com_postinstall">Post-installation Messages</a></li>
+							<li><a class="menu-redirect" href="index.php?option=com_redirect">Redirect</a></li>
+							<li><a class="menu-search" href="index.php?option=com_search">Search</a></li>
+							<li><a class="menu-finder" href="index.php?option=com_finder">Smart Search</a></li>
+							<li><a class="menu-tags" href="index.php?option=com_tags">Tags</a></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-weblinks" data-toggle="dropdown" href="index.php?option=com_weblinks">Weblinks</a>
+								<ul id="menu-com-weblinks" class="dropdown-menu menu-component">
+									<li><a class="menu-weblinks" href="index.php?option=com_weblinks">Links</a></li>
+									<li><a class="menu-weblinks-cat" href="index.php?option=com_categories&amp;extension=com_weblinks">Categories</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Extensions <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="menu-install" href="index.php?option=com_installer">Extension Manager</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-module" href="index.php?option=com_modules">Module Manager</a></li>
+							<li><a class="menu-plugin" href="index.php?option=com_plugins">Plugin Manager</a></li>
+							<li><a class="menu-themes" href="index.php?option=com_templates">Template Manager</a></li>
+							<li><a class="menu-language" href="index.php?option=com_languages">Language Manager</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Help <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="menu-help" href="index.php?option=com_admin&amp;view=help">Joomla! Help</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-help-forum" href="http://forum.joomla.org" target="_blank">Official Support Forum</a></li>
+							<li><a class="menu-help-docs" href="http://docs.joomla.org" target="_blank">Documentation Wiki</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-help-jed" href="http://extensions.joomla.org" target="_blank">Joomla! Extensions</a></li>
+							<li><a class="menu-help-trans" href="http://community.joomla.org/translations.html" target="_blank">Joomla! Translations</a></li>
+							<li><a class="menu-help-jrd" href="http://resources.joomla.org" target="_blank">Joomla! Resources</a></li>
+							<li><a class="menu-help-community" href="http://community.joomla.org" target="_blank">Community Portal</a></li>
+							<li><a class="menu-help-security" href="http://developer.joomla.org/security.html" target="_blank">Security Center</a></li>
+							<li><a class="menu-help-dev" href="http://developer.joomla.org" target="_blank">Developer Resources</a></li>
+							<li><a class="menu-help-shop" href="http://shop.joomla.org" target="_blank">Joomla! Shop</a></li>
+						</ul>
+					</li>
+				</ul>
+				
+				<ul class="nav nav-user pull-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-cog"></span>
+						<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li>
+								<span>
+								<span class="icon-user"></span>
+								<strong>Super User</strong>
+								</span>
+							</li>
+							<li class="divider"></li>
+							<li class="">
+								<a href="index.php?option=com_admin&amp;task=profile.edit&amp;id=917">Edit Account</a>
+							</li>
+							<li class="divider"></li>
+							<li class="">
+								<a href="/administrator/index.php?option=com_login&amp;task=logout&amp;4a3fbec96170c86e879a24698cb9c732=1">Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<a class="brand visible-desktop visible-tablet" href="http://localjoomla/" title="Preview Testing Admin" target="_blank">Testing Admin					<span class="icon-out-2 small"></span></a>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+</nav>
+<!-- Header -->
+<header class="header">
+	<div class="container-logo">
+		<img src="assets/images/logo.png" class="logo" alt="Testing Admin">
+	</div>
+	<div class="container-title">
+		<h1 class="page-title"><span class="icon-home-2 cpanel"></span>Control Panel</h1>
+	</div>
+</header>
+<div style="margin-bottom: 20px"></div>
+<!-- container-fluid -->
+<div class="container-fluid container-main">
+<section id="content">
+<!-- Begin Content -->
+
+<div class="row-fluid">
+<div class="span12">
+<div id="system-message-container">
+</div>
+
+<div class="row-fluid">
+<div class="span3">
+<div class="cpanel-links">
+<div class="sidebar-nav quick-icons">
+<div class="j-links-groups"><h2 class="nav-header">Content</h2>
+	<ul class="j-links-group nav nav-list">
+		<li>
+			<a href="/administrator/index.php?option=com_content&amp;task=article.add">
+			<i class="icon-pencil-2"></i> <span class="j-links-link">Add New Article</span>	</a>
+		</li>
+		<li>
+			<a href="/administrator/index.php?option=com_content">
+			<i class="icon-stack"></i> <span class="j-links-link">Article Manager</span>	</a>
+		</li>
+		<li>
+			<a href="/administrator/index.php?option=com_categories&amp;extension=com_content">
+			<i class="icon-folder"></i> <span class="j-links-link">Category Manager</span>	</a>
+		</li>
+		<li>
+			<a href="/administrator/index.php?option=com_media">
+			<i class="icon-pictures"></i> <span class="j-links-link">Media Manager</span>	</a>
+		</li>
+	</ul>
+	<h2 class="nav-header">Structure</h2>
+	<ul class="j-links-group nav nav-list">
+		<li>
+			<a href="/administrator/index.php?option=com_menus">
+			<i class="icon-list-view"></i> <span class="j-links-link">Menu Manager</span>	</a>
+		</li>
+		<li>
+			<a href="/administrator/index.php?option=com_modules">
+			<i class="icon-cube"></i> <span class="j-links-link">Module Manager</span>	</a>
+		</li>
+	</ul>
+	<h2 class="nav-header">Users</h2>
+	<ul class="j-links-group nav nav-list">
+		<li>
+			<a href="/administrator/index.php?option=com_users">
+			<i class="icon-users"></i> <span class="j-links-link">User Manager</span>	</a>
+		</li>
+	</ul>
+	<h2 class="nav-header">Configuration</h2>
+	<ul class="j-links-group nav nav-list">
+		<li>
+			<a href="/administrator/index.php?option=com_config">
+			<i class="icon-cog"></i> <span class="j-links-link">Global Configuration</span>	</a>
+		</li>
+		<li>
+			<a href="/administrator/index.php?option=com_templates">
+			<i class="icon-eye"></i> <span class="j-links-link">Template Manager</span>	</a>
+		</li>
+		<li>
+			<a href="/administrator/index.php?option=com_languages">
+			<i class="icon-comments-2"></i> <span class="j-links-link">Language Manager</span>	</a>
+		</li>
+	</ul>
+	<h2 class="nav-header">Extensions</h2>
+	<ul class="j-links-group nav nav-list">
+		<li>
+			<a href="/administrator/index.php?option=com_installer">
+			<i class="icon-download"></i> <span class="j-links-link">Install Extensions</span>	</a>
+		</li>
+	</ul>
+	<h2 class="nav-header">Maintenance</h2>
+	<ul class="j-links-group nav nav-list">
+		<li id="plg_quickicon_joomlaupdate">
+			<a href="index.php?option=com_joomlaupdate">
+			<i class="icon-joomla"></i> Joomla! is up-to-date	</a>
+		</li>
+		<li id="plg_quickicon_extensionupdate">
+			<a href="index.php?option=com_installer&amp;view=update">
+			<i class="icon-asterisk"></i> <span class="j-links-link">All extensions are up-to-date</span>	</a>
+		</li>
+	</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="span9">
+<div class="row-fluid">
+	<div class="alert alert-info">
+		<h4>
+		You have post-installation messages</h4>
+		<p>
+		There are important post-installation messages that require your attention. To view those messages please click on the Review Messages button below.</p>
+		<p>
+		You can review the messages at any time by clicking on the Components, Post-installation messages menu item of your site's administrator section. This information area won't appear when you have hidden all messages.</p>
+		<p>
+		<a href="index.php?option=com_postinstall&amp;eid=700" class="btn btn-primary">Review Messages</a>
+		</p>
+	</div>
+</div>
+<div class="row-fluid">
+<div class="well well-small span6"><h2 class="module-title nav-header">Popular Articles</h2>
+<div class="row-striped">
+	<div class="row-fluid">
+		<div class="span9">
+			<span class="badge badge-info hasTooltip" title="" data-original-title="Hits">16</span>
+			<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=1">About</a></strong>
+		</div>
+		<div class="span3">
+			<span class="small"><i class="icon-calendar"></i>2011-01-01</span>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span9">
+			<span class="badge badge- hasTooltip" title="" data-original-title="Hits">8</span>
+			<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=2">Working on Your Site</a></strong>
+		</div>
+		<div class="span3">
+			<span class="small"><i class="icon-calendar"></i>2011-01-01</span>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="span9">
+			<span class="badge badge- hasTooltip" title="" data-original-title="Hits">5</span>
+			
+			<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=3">Welcome to your blog</a></strong></div>
+			<div class="span3">
+				<span class="small"><i class="icon-calendar"></i>2011-01-05</span>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span9">
+				<span class="badge badge- hasTooltip" title="" data-original-title="Hits">5</span>
+				
+				<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=4">About your home page</a></strong>
+			</div>
+			<div class="span3">
+				<span class="small"><i class="icon-calendar"></i>2011-01-03</span>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="span9">
+				<span class="badge badge- hasTooltip" title="" data-original-title="Hits">4</span>
+				
+				<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=5">Your Modules</a></strong>
+			</div>
+			<div class="span3">
+				<span class="small"><i class="icon-calendar"></i>2010-12-31</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="well well-small span6">
+	<h2 class="module-title nav-header">Recently Added Articles</h2>
+	<div class="row-striped">
+		<div class="row-fluid">
+			<div class="span9">
+				<a class="btn btn-micro disabled jgrid hasTooltip" title="" data-original-title="Published"><i class="icon-publish"></i></a>					
+				<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=3">Welcome to your blog</a></strong>
+				
+				<small class="hasTooltip" title="" data-original-title="Created By">Super User</small>
+			</div>
+			<div class="span3">
+				<span class="small"><i class="icon-calendar"></i> 2011-01-05</span></div>
+			</div>
+			<div class="row-fluid">
+				<div class="span9">
+					<a class="btn btn-micro disabled jgrid hasTooltip" title="" data-original-title="Published"><i class="icon-publish"></i></a>					
+					<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=4">About your home page</a></strong>
+					
+					<small class="hasTooltip" title="" data-original-title="Created By">Super User</small>
+				</div>
+				<div class="span3">
+					<span class="small"><i class="icon-calendar"></i> 2011-01-03</span>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span9">
+					<a class="btn btn-micro disabled jgrid hasTooltip" title="" data-original-title="Published"><i class="icon-publish"></i></a>					
+					<strong class="row-title">
+					<a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=6">Your Template</a></strong>
+					
+					<small class="hasTooltip" title="" data-original-title="Created By">Super User</small>
+				</div>
+				<div class="span3">
+					<span class="small"><i class="icon-calendar"></i> 2011-01-02</span>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span9">
+					<a class="btn btn-micro disabled jgrid hasTooltip" title="" data-original-title="Published"><i class="icon-publish"></i></a>					
+					<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=1">About</a></strong>
+					<small class="hasTooltip" title="" data-original-title="Created By">Super User</small>
+				</div>
+				<div class="span3">
+					<span class="small"><i class="icon-calendar"></i> 2011-01-01</span>
+				</div>
+			</div>
+			<div class="row-fluid">
+				<div class="span9">
+					<a class="btn btn-micro disabled jgrid hasTooltip" title="" data-original-title="Published"><i class="icon-publish"></i></a>					
+					<strong class="row-title"><a href="/administrator/index.php?option=com_content&amp;task=article.edit&amp;id=2">Working on Your Site</a></strong>
+					<small class="hasTooltip" title="" data-original-title="Created By">Super User</small>
+				</div>
+				<div class="span3">
+					<span class="small"><i class="icon-calendar"></i> 2011-01-01</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row-fluid">
+	<div class="well well-small span6">
+		<h2 class="module-title nav-header">Logged-in Users</h2><div class="row-striped">
+		<div class="row-fluid">
+			<div class="span9">
+				<strong class="row-title"><a href="/administrator/index.php?option=com_users&amp;task=user.edit&amp;id=917" class="hasTooltip" title="" data-original-title="ID : 917">Super User</a></strong>
+				<small class="small hasTooltip" title="" data-original-title="Location">Administration</small>
+			</div>
+			<div class="span3">
+				<span class="small hasTooltip" title="" data-original-title="Last Activity"><i class="icon-calendar"></i> 2014-10-19</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="well well-small span6">
+	<h2 class="module-title nav-header">Site Information</h2>
+	<ul class="list-striped list-condensed stats-module">
+		<li><i class="icon-screen" title="OS"></i> OS Darwin </li>
+		<li><i class="icon-cogs" title="PHP"></i> PHP 5.4.4</li>
+		<li><i class="icon-database" title="MySQLi"></i> MySQLi 5.5.25</li>
+		<li><i class="icon-clock" title="Time"></i> Time 23:37</li>
+		<li><i class="icon-dashboard" title="Caching"></i> Caching Disabled</li>
+		<li><i class="icon-lightning" title="GZip"></i> GZip Disabled</li>
+		<li><i class="icon-users" title="Users"></i> Users 1</li>
+		<li><i class="icon-file" title="Articles"></i> Articles 6</li>
+		<li><i class="icon-out-2" title="Web Links"></i> Web Links 2</li>
+	</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Content -->
+</section>
+
+</div>
+<!-- Begin Status Module -->
+<div id="status" class="navbar navbar-fixed-bottom hidden-phone">
+	<div class="btn-toolbar">
+		<div class="btn-group pull-right">
+			<p>© 2014 Testing Admin</p>
+		</div>
+		<div class="btn-group viewsite">
+			<a href="http://localjoomla/" target="_blank"><i class="icon-share-alt"></i> View Site</a>
+		</div>
+		<div class="btn-group divider"></div>
+		<div class="btn-group loggedin-users"><span class="badge">0</span> Visitors</div>
+		<div class="btn-group backloggedin-users"><span class="badge">1</span> Admin</div>
+		<div class="btn-group hasTooltip no-unread-messages" title="" data-original-title="0 Messages"><a href="/administrator/index.php?option=com_messages"><i class="icon-envelope"></i> <span class="badge">0</span></a>
+			<div class="btn-group divider"></div>
+		</div>
+		<div class="btn-group logout"><a href="/administrator/index.php?option=com_login&amp;task=logout&amp;4a3fbec96170c86e879a24698cb9c732=1"><i class="icon-minus-2"></i> Log out</a></div>
+	</div>
+</div>
+<!-- End Status Module -->
+
+<script>
+(function($)
+{
+// fix sub nav on scroll
+var $win = $(window)
+, $nav    = $('.subhead')
+, navTop  = $('.subhead').length && $('.subhead').offset().top - 40
+, isFixed = 0
+
+processScroll()
+
+// hack sad times - holdover until rewrite for 2.1
+$nav.on('click', function()
+{
+if (!isFixed) {
+setTimeout(function()
+{
+$win.scrollTop($win.scrollTop() - 47)
+}, 10)
+}
+})
+
+$win.on('scroll', processScroll)
+
+function processScroll()
+{
+var i, scrollTop = $win.scrollTop()
+if (scrollTop >= navTop && !isFixed) {
+isFixed = 1
+$nav.addClass('subhead-fixed')
+} else if (scrollTop <= navTop && isFixed) {
+isFixed = 0
+$nav.removeClass('subhead-fixed')
+}
+}
+})(jQuery);
+</script>
+
+
+</body>
+</html>

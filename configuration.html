@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="generator" content="Joomla! - Open Source Content Management">
+	<title>Testing Admin - Administration - Control Panel</title>
+	<link href="/administrator/templates/isis/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+	<link rel="stylesheet" href="assets/css/chosen.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/modal.css" type="text/css">
+	<link rel="stylesheet" href="assets/css/template.css" type="text/css">
+	<script src="assets/js/jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-noconflict.js" type="text/javascript"></script>
+	<script src="assets/js/jquery-migrate.min.js" type="text/javascript"></script>
+	<script src="assets/js/tabs-state.js" type="text/javascript"></script>
+	<script src="assets/js/mootools-core.js" type="text/javascript"></script>
+	<script src="assets/js/core.js" type="text/javascript"></script>
+	<script src="assets/js/punycode.js" type="text/javascript"></script>
+	<script src="assets/js/validate.js" type="text/javascript"></script>
+	<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/chosen.jquery.min.js" type="text/javascript"></script>
+	<script src="assets/js/html5fallback.js" type="text/javascript"></script>
+	<script src="assets/js/mootools-more.js" type="text/javascript"></script>
+	<script src="assets/js/modal.js" type="text/javascript"></script>
+	<script src="assets/js/helpsite.js" type="text/javascript"></script>
+	<script src="assets/js/cms.js" type="text/javascript"></script>
+	<script src="assets/js/template.js" type="text/javascript"></script>
+	
+	<script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('.hasTooltip').tooltip({"html": true,"container": "body"});
+		});
+		jQuery(document).ready(function (){
+			jQuery('select').chosen({"disable_search_threshold":10,"allow_single_deselect":true,"placeholder_text_multiple":"Select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
+		});
+	
+		jQuery(function($) {
+			SqueezeBox.initialize({});
+			SqueezeBox.assign($('a.modal').get(), {
+				parse: 'rel'
+			});
+		});
+		function jInsertFieldValue(value, id) {
+			var $ = jQuery.noConflict();
+			var old_value = $("#" + id).val();
+			if (old_value != value) {
+				var $elem = $("#" + id);
+				$elem.val(value);
+				$elem.trigger("change");
+				if (typeof($elem.get(0).onchange) === "function") {
+					$elem.get(0).onchange();
+				}
+				jMediaRefreshPreview(id);
+			}
+		}
+		function jMediaRefreshPreview(id) {
+			var $ = jQuery.noConflict();
+			var value = $("#" + id).val();
+			var $img = $("#" + id + "_preview");
+			if ($img.length) {
+				if (value) {
+					$img.attr("src", "http://localjoomla/" + value);
+					$("#" + id + "_preview_empty").hide();
+					$("#" + id + "_preview_img").show()
+				} else { 
+					$img.attr("src", "")
+					$("#" + id + "_preview_empty").show();
+					$("#" + id + "_preview_img").hide();
+				} 
+			} 
+		}
+		function jMediaRefreshPreviewTip(tip)
+		{
+			var $ = jQuery.noConflict();
+			var $tip = $(tip);
+			var $img = $tip.find("img.media-preview");
+			$tip.find("div.tip").css("max-width", "none");
+			var id = $img.attr("id");
+			id = id.substring(0, id.length - "_preview".length);
+			jMediaRefreshPreview(id);
+			$tip.show();
+		}
+		jQuery(function($) {
+			 $('.hasTipPreview').each(function() {
+				var title = $(this).attr('title');
+				if (title) {
+					var parts = title.split('::', 2);
+					$(this).data('tip:title', parts[0]);
+					$(this).data('tip:text', parts[1]);
+				}
+			});
+			var JTooltips = new Tips($('.hasTipPreview').get(), {"maxTitleChars": 50,"fixed": false,"onShow": jMediaRefreshPreviewTip});
+		});
+		var helpsite_base = "http://localjoomla/";
+		</script>
+	
+	<!-- Template color -->
+	<!-- Template header color -->
+	
+	<!-- Sidebar background color -->
+	
+	<!--[if lt IE 9]>
+	<script src="../media/jui/js/html5.js"></script>
+	<![endif]-->
+</head>
+
+<body class="admin com_cpanel view- layout- task- itemid-" data-spy="scroll" data-target=".subhead" data-offset="87">
+<!-- Top Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="admin-logo" href="/administrator"><span class="icon-joomla"></span></a>
+			<a class="brand hidden-desktop hidden-tablet" href="http://localjoomla/" title="Preview Testing Admin" target="_blank">Testing Admin <span class="icon-out-2 small"></span></a>
+			
+			<div class="nav-collapse">
+				<ul id="menu" class="nav ">
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">System <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="menu-cpanel" href="#">Control Panel</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-config" href="#">Global Configuration</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-checkin" href="#">Global Check-in</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-clear" href="#">Clear Cache</a></li>
+							<li><a class="menu-purge" href="#">Purge Expired Cache</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-info" href="#">System Information</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-user" data-toggle="dropdown" href="#">User Manager</a>
+								<ul id="menu-com-users-users" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New User</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-groups" data-toggle="dropdown" href="#">Groups</a>
+								<ul id="menu-com-users-groups" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Group</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-levels" data-toggle="dropdown" href="#">Access Levels</a>
+								<ul id="menu-com-users-levels" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Access Level</a></li>
+								</ul>
+							</li>
+							<li class="divider"><span></span></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-user-note" data-toggle="dropdown" href="#">User Notes</a>
+								<ul id="menu-com-users-notes" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add User Note</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-category" data-toggle="dropdown" href="#">User Note Categories</a>
+								<ul id="menu-com-categories-categories-com-users" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Category</a></li>
+								</ul>
+							</li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-massmail" href="#">Mass Mail Users</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Menus <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menumgr" data-toggle="dropdown" href="#">Menu Manager</a>
+								<ul id="menu-com-menus-menus" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Menu</a></li>
+								</ul>
+							</li>
+							<li class="divider"><span></span></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menu" data-toggle="dropdown" href="#">Main Menu <i class="icon-home"></i></a>
+								<ul id="menu-com-menus-items-mainmenu" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Menu Item</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menu" data-toggle="dropdown" href="#">Author Menu</a>
+								<ul id="menu-com-menus-items-authormenu" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Menu Item</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-menu" data-toggle="dropdown" href="#">Bottom Menu</a>
+								<ul id="menu-com-menus-items-bottommenu" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Menu Item</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Content <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-article" data-toggle="dropdown" href="#">Article Manager</a>
+								<ul id="menu-com-content" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Article</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-category" data-toggle="dropdown" href="#">Category Manager</a>
+								<ul id="menu-com-categories-com-content" class="dropdown-menu menu-component">
+									<li><a class="menu-newarticle" href="#">Add New Category</a></li>
+								</ul>
+							</li>
+							<li><a class="menu-featured" href="#">Featured Articles</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-media" href="#">Media Manager</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Components <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-banners" data-toggle="dropdown" href="#">Banners</a>
+								<ul id="menu-com-banners" class="dropdown-menu menu-component">
+									<li><a class="menu-banners" href="#">Banners</a></li>
+									<li><a class="menu-banners-cat" href="#">Categories</a></li>
+									<li><a class="menu-banners-clients" href="#">Clients</a></li>
+									<li><a class="menu-banners-tracks" href="#">Tracks</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-contact" data-toggle="dropdown" href="#">Contacts</a>
+								<ul id="menu-com-contact" class="dropdown-menu menu-component">
+									<li><a class="menu-contact" href="#">Contacts</a></li>
+									<li><a class="menu-contact-cat" href="#">Categories</a></li>
+								</ul>
+							</li>
+							<li><a class="menu-joomlaupdate" href="#">Joomla! Update</a></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-messages" data-toggle="dropdown" href="#">Messaging</a>
+								<ul id="menu-com-messages" class="dropdown-menu menu-component">
+									<li><a class="menu-messages-add" href="#">New Private Message</a></li>
+									<li><a class="menu-messages-read" href="#">Read Private Messages</a></li>
+								</ul>
+							</li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-newsfeeds" data-toggle="dropdown" href="#">Newsfeeds</a>
+								<ul id="menu-com-newsfeeds" class="dropdown-menu menu-component">
+									<li><a class="menu-newsfeeds" href="#">Feeds</a></li>
+									<li><a class="menu-newsfeeds-cat" href="#">Categories</a></li>
+								</ul>
+							</li>
+							<li><a class="menu-postinstall" href="#">Post-installation Messages</a></li>
+							<li><a class="menu-redirect" href="#">Redirect</a></li>
+							<li><a class="menu-search" href="#">Search</a></li>
+							<li><a class="menu-finder" href="#">Smart Search</a></li>
+							<li><a class="menu-tags" href="#">Tags</a></li>
+							<li class="dropdown-submenu"><a class="dropdown-toggle menu-weblinks" data-toggle="dropdown" href="#">Weblinks</a>
+								<ul id="menu-com-weblinks" class="dropdown-menu menu-component">
+									<li><a class="menu-weblinks" href="#">Links</a></li>
+									<li><a class="menu-weblinks-cat" href="#">Categories</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Extensions <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="menu-install" href="#">Extension Manager</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-module" href="#">Module Manager</a></li>
+							<li><a class="menu-plugin" href="#">Plugin Manager</a></li>
+							<li><a class="menu-themes" href="#">Template Manager</a></li>
+							<li><a class="menu-language" href="#">Language Manager</a></li>
+						</ul>
+					</li>
+					<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Help <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a class="menu-help" href="#">Joomla! Help</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-help-forum" href="#" target="_blank">Official Support Forum</a></li>
+							<li><a class="menu-help-docs" href="#" target="_blank">Documentation Wiki</a></li>
+							<li class="divider"><span></span></li>
+							<li><a class="menu-help-jed" href="#" target="_blank">Joomla! Extensions</a></li>
+							<li><a class="menu-help-trans" href="#" target="_blank">Joomla! Translations</a></li>
+							<li><a class="menu-help-jrd" href="#" target="_blank">Joomla! Resources</a></li>
+							<li><a class="menu-help-community" href="#" target="_blank">Community Portal</a></li>
+							<li><a class="menu-help-security" href="#" target="_blank">Security Center</a></li>
+							<li><a class="menu-help-dev" href="#" target="_blank">Developer Resources</a></li>
+							<li><a class="menu-help-shop" href="#" target="_blank">Joomla! Shop</a></li>
+						</ul>
+					</li>
+				</ul>
+				
+				<ul class="nav nav-user pull-right">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="icon-cog"></span>
+						<b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li>
+								<span>
+								<span class="icon-user"></span>
+								<strong>Super User</strong>
+								</span>
+							</li>
+							<li class="divider"></li>
+							<li class="">
+								<a href="#">Edit Account</a>
+							</li>
+							<li class="divider"></li>
+							<li class="">
+								<a href="#">Logout</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<a class="brand visible-desktop visible-tablet" href="#" title="Preview Testing Admin" target="_blank">Testing Admin					<span class="icon-out-2 small"></span></a>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+</nav>
+<!-- Header -->
+<header class="header">
+	<div class="container-logo">
+		<img src="assets/images/logo.png" class="logo" alt="Testing Admin">
+	</div>
+	<div class="container-title">
+		<h1 class="page-title"><span class="icon-home-2 cpanel"></span>Control Panel</h1>
+	</div>
+</header>
+<a class="btn btn-subhead" data-toggle="collapse" data-target=".subhead-collapse">Toolbar<i class="icon-wrench"></i></a>
+<div class="subhead-collapse collapse">
+	<div class="subhead">
+		<div class="container-fluid">
+			<div id="container-collapse" class="container-collapse"></div>
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="btn-toolbar" id="toolbar">
+						<div class="btn-wrapper" id="toolbar-apply">
+							<button onclick="Joomla.submitbutton('config.save.application.apply')" class="btn btn-small btn-success">
+							<span class="icon-apply icon-white"></span>
+							Save</button>
+						</div>
+						<div class="btn-wrapper" id="toolbar-save">
+							<button onclick="Joomla.submitbutton('config.save.application.save')" class="btn btn-small">
+							<span class="icon-save"></span>
+							Save &amp; Close</button>
+						</div>
+						<div class="btn-wrapper" id="toolbar-cancel">
+							<button onclick="Joomla.submitbutton('config.cancel.application')" class="btn btn-small">
+							<span class="icon-cancel"></span>
+							Cancel</button>
+						</div>
+						<div class="btn-wrapper" id="toolbar-help">
+							<button onclick="Joomla.popupWindow('http://help.joomla.org/proxy/index.php?option=com_help&amp;amp;keyref=Help33:Site_Global_Configuration', 'Help', 700, 500, 1)" rel="help" class="btn btn-small">
+							<span class="icon-question-sign"></span>
+							Help</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- container-fluid -->
+<div class="container-fluid container-main">
+<section id="content">
+<!-- Begin Content -->
+
+<div class="row-fluid">
+<div class="span12">
+	<div id="system-message-container">
+</div>
+
+<div class="row-fluid">
+	<!-- Begin Sidebar -->
+	<div id="sidebar" class="span2">
+		<div class="sidebar-nav">
+			<ul class="nav nav-list">
+				<li class="nav-header">System</li>
+				<li class=""><a href="index.php?option=com_config">Global Configuration</a></li>
+				<li class="divider"></li>
+				<li class="nav-header">Component</li>
+				<li><a href="#">Banners</a></li>
+				<li><a href="#">Cache Manager</a></li>
+				<li><a href="#">Check-in</a></li>
+				<li><a href="#">Contacts</a></li>
+				<li><a href="#">Articles</a></li>
+				<li><a href="#">Smart Search</a></li>
+				<li><a href="#">Installation Manager</a></li>
+				<li><a href="#">Joomla! Update</a></li>
+				<li><a href="#">Language Manager</a></li>
+				<li><a href="#">Media Manager</a></li>
+				<li><a href="#">Menus Manager</a></li>
+				<li><a href="#">Messaging</a></li>
+				<li><a href="#">Module Manager</a></li>
+				<li><a href="#">Newsfeeds</a></li>
+				<li><a href="#">Plugins Manager</a></li>
+				<li><a href="#">Post-installation Messages</a></li>
+				<li><a href="#">Redirect</a></li>
+				<li><a href="#">Search</a></li>
+				<li><a href="#">Tags</a></li>
+				<li><a href="#">Template Manager</a></li>
+				<li><a href="#">Users Manager</a></li>
+				<li><a href="#">Weblinks</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- End Sidebar -->
+<!-- Begin Content -->
+<div class="span10">
+	<ul class="nav nav-tabs">
+		<li class="active"><a href="#page-site" data-toggle="tab">Site</a></li>
+		<li><a href="#page-permissions" data-toggle="tab">Permissions</a></li>
+		<li><a href="#page-filters" data-toggle="tab">Text Filters</a></li>
+	</ul>
+<div id="config-document" class="tab-content">
+<div id="page-site" class="tab-pane active">
+<div class="row-fluid">
+<div class="span6">
+<fieldset class="form-horizontal">
+<legend>Site Settings</legend>
+	<div class="control-group">
+		<div class="control-label">
+			<label id="jform_sitename-lbl" for="jform_sitename" class="hasTooltip required" title="" data-original-title="<strong>Site Name</strong><br />Enter the name of your Web site. This will be used in various locations (e.g. the backend browser title bar and <em>Site Offline</em> pages).">
+		Site Name<span class="star">&nbsp;*</span></label>
+		</div>
+		<div class="controls"><input type="text" name="jform[sitename]" id="jform_sitename" value="Testing Admin" class="required" size="50" required="required" aria-required="true"></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_offline-lbl" for="jform_offline" class="hasTooltip" title="" data-original-title="<strong>Site Offline</strong><br />Select whether access to the Site frontend is available. If Yes, the frontend will display or not a message depending on the settings below.">
+		Site Offline</label></div>
+		<div class="controls"><fieldset id="jform_offline" class="radio btn-group btn-group-yesno"><input type="radio" id="jform_offline0" name="jform[offline]" value="1"><label for="jform_offline0">Yes</label><input type="radio" id="jform_offline1" name="jform[offline]" value="0" checked="checked"><label for="jform_offline1" class="btn-danger">No</label></fieldset></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_display_offline_message-lbl" for="jform_display_offline_message" class="hasTooltip" title="" data-original-title="<strong>Offline Message</strong><br />Display or not a frontend message when the site is offline. The custom offline message uses the value defined in the 'Custom message' field. The language offline message uses the value defined in the site language ini file.">
+		Offline Message</label></div>
+		<div class="controls">
+			<select id="jform_display_offline_message" name="jform[display_offline_message]" class="chzn-done" style="display: none;">
+				<option value="0">Hide</option>
+				<option value="1" selected="selected">Use Custom Message</option>
+				<option value="2">Use Site Language Default Message</option>
+			</select>
+			
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_offline_message-lbl" for="jform_offline_message" class="hasTooltip" title="" data-original-title="<strong>Custom Message</strong><br />The custom offline message will be used if the 'Offline Message' field is set to 'Use custom message'.">
+		Custom Message</label></div>
+		<div class="controls"><textarea name="jform[offline_message]" id="jform_offline_message" cols="60" rows="2">This site is down for maintenance.&lt;br /&gt; Please check back again soon.</textarea></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_offline_image-lbl" for="jform_offline_image" class="hasTooltip" title="" data-original-title="<strong>Offline Image</strong><br />An optional image to be displayed on the default offline page. Make sure the image is less than 400px wide.">
+		Offline Image</label></div>
+		<div class="controls">
+			<div class="input-prepend input-append">
+				<div class="media-preview add-on"><span class="hasTipPreview" title=""><i class="icon-eye"></i></span></div>
+				<input type="text" name="jform[offline_image]" id="jform_offline_image" value="" readonly="readonly" class="input-small">
+				<a class="modal btn" title="Select" href="index.php?option=com_media&amp;view=images&amp;tmpl=component&amp;asset=1&amp;author=&amp;fieldid=jform_offline_image&amp;folder=" rel="{handler: 'iframe', size: {x: 800, y: 500}}">Select</a><a class="btn hasTooltip" title="" href="#" onclick="jInsertFieldValue('', 'jform_offline_image');return false;" data-original-title="Clear"><i class="icon-remove"></i></a>
+			</div>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_feed_email-lbl" for="jform_feed_email" class="hasTooltip" title="" data-original-title="<strong>Feed email</strong><br />The RSS and Atom newsfeeds include the author's email address. Select Author Email to use each author's email (from the User Manager) in the news feed. Select Site Email to include the site 'Mail from' email address for each article.">
+		Feed email</label></div>
+		<div class="controls">
+			<select id="jform_feed_email" name="jform[feed_email]" class="chzn-done" style="display: none;">
+				<option value="author" selected="selected">Author Email</option>
+				<option value="site">Site Email</option>
+				<option value="none">No Email</option>
+			</select>
+		</div>
+	</div>
+</fieldset>
+</div>
+<div class="span6">
+<fieldset class="form-horizontal">
+	<legend>SEO Settings</legend>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_sef-lbl" for="jform_sef" class="hasTooltip" title="" data-original-title="<strong>Search Engine Friendly URLs</strong><br />Select whether or not the URLs are optimised for Search Engines.">
+		Search Engine Friendly URLs</label></div>
+		<div class="controls"><fieldset id="jform_sef" class="radio btn-group btn-group-yesno"><input type="radio" id="jform_sef0" name="jform[sef]" value="1" checked="checked"><label for="jform_sef0" class="btn  btn-success">Yes</label><input type="radio" id="jform_sef1" name="jform[sef]" value="0"><label for="jform_sef1" class="btn">No</label></fieldset></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_sef_rewrite-lbl" for="jform_sef_rewrite" class="hasTooltip" title="" data-original-title="<strong>Use URL rewriting</strong><br />Select to use a server's rewrite engine to catch URLs that meet specific conditions and rewrite them as directed. Available for IIS 7 and Apache. <br /><strong>Apache users only!</strong><br /> Rename htaccess.txt to .htaccess before activating.<br /><strong>IIS 7 users only!</strong><br /> Rename web.config.txt to web.config and install IIS URL Rewrite Module before activating.<br />">
+		Use URL rewriting</label></div>
+		<div class="controls"><fieldset id="jform_sef_rewrite" class="radio btn-group btn-group-yesno"><input type="radio" id="jform_sef_rewrite0" name="jform[sef_rewrite]" value="1"><label for="jform_sef_rewrite0" class="btn">Yes</label><input type="radio" id="jform_sef_rewrite1" name="jform[sef_rewrite]" value="0" checked="checked"><label for="jform_sef_rewrite1" class="btn  btn-danger">No</label></fieldset></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_sef_suffix-lbl" for="jform_sef_suffix" class="hasTooltip" title="" data-original-title="<strong>Adds Suffix to URL</strong><br />If yes, the system will add a suffix to the URL based on the document type.">
+		Adds Suffix to URL</label></div>
+		<div class="controls"><fieldset id="jform_sef_suffix" class="radio btn-group btn-group-yesno"><input type="radio" id="jform_sef_suffix0" name="jform[sef_suffix]" value="1"><label for="jform_sef_suffix0" class="btn">Yes</label><input type="radio" id="jform_sef_suffix1" name="jform[sef_suffix]" value="0" checked="checked"><label for="jform_sef_suffix1" class="btn  btn-danger">No</label></fieldset></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_unicodeslugs-lbl" for="jform_unicodeslugs" class="hasTooltip" title="" data-original-title="<strong>Unicode Aliases</strong><br />Choose between transliteration and unicode aliases. Transliteration is default.">
+		Unicode Aliases</label></div>
+		<div class="controls"><fieldset id="jform_unicodeslugs" class="radio btn-group btn-group-yesno"><input type="radio" id="jform_unicodeslugs0" name="jform[unicodeslugs]" value="1"><label for="jform_unicodeslugs0" class="btn">Yes</label><input type="radio" id="jform_unicodeslugs1" name="jform[unicodeslugs]" value="0" checked="checked"><label for="jform_unicodeslugs1" class="btn  btn-danger">No</label></fieldset></div>
+	</div>
+	<div class="control-group">
+		<div class="control-label"><label id="jform_sitename_pagetitles-lbl" for="jform_sitename_pagetitles" class="hasTooltip" title="" data-original-title="<strong>Include Site Name in Page Titles</strong><br />Begin or end all Page Titles with the site name (for example, My Site Name - My Article Name).">
+		Include Site Name in Page Titles</label></div>
+		<div class="controls">
+		<select id="jform_sitename_pagetitles" name="jform[sitename_pagetitles]" class="chzn-done" style="display: none;">
+			<option value="2">After</option>
+			<option value="1">Before</option>
+			<option value="0" selected="selected">No</option>
+		</select>
+		
+		</div>
+	</div>
+</fieldset>
+</div>
+</div>
+</div>
+<div id="page-permissions" class="tab-pane">
+<div class="row-fluid">
+<fieldset class="form-vertical">
+	<legend>Permission Settings</legend>
+	<div class="control-group">
+	<div class="controls"><p class="rule-desc">Manage the permission settings for the user groups below. See notes at the bottom.</p>
+	<div id="permissions-sliders" class="tabbable tabs-left">
+		<ul class="nav nav-tabs">
+			<li class="active"><a href="#permission-1" data-toggle="tab">Public</a></li>
+			<li class=""><a href="#permission-9" data-toggle="tab"><span class="level">–</span> Guest</a></li>
+			<li class=""><a href="#permission-6" data-toggle="tab"><span class="level">–</span> Manager</a></li>
+			<li class=""><a href="#permission-7" data-toggle="tab"><span class="level">–</span> <span class="level">–</span> Administrator</a></li>
+			<li class=""><a href="#permission-2" data-toggle="tab"><span class="level">–</span> Registered</a></li>
+			<li class=""><a href="#permission-3" data-toggle="tab"><span class="level">–</span> <span class="level">–</span> Author</a></li>
+			<li class=""><a href="#permission-4" data-toggle="tab"><span class="level">–</span> <span class="level">–</span> <span class="level">–</span> Editor</a></li>
+			<li class=""><a href="#permission-5" data-toggle="tab"><span class="level">–</span> <span class="level">–</span> <span class="level">–</span> <span class="level">–</span> Publisher</a></li>
+			<li class=""><a href="#permission-8" data-toggle="tab"><span class="level">–</span> Super Users</a></li>
+		</ul>
+	<div class="tab-content">
+	<div class="tab-pane active" id="permission-1">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="actions" id="actions-th1">
+						<span class="acl-action">Action</span>
+					</th>
+					<th class="settings" id="settings-th1">
+						<span class="acl-action">Select New Setting <sup>1</sup></span>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.login.site_1" class="hasTooltip" title="" data-original-title="Site Login Allows users in the group to login to the frontend site.">Site Login</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.login.site][1]" id="jform_rules_core.login.site_1" title="Allow or deny Site Login for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.login.admin_1" class="hasTooltip" title="" data-original-title="Admin Login Allows users in the group to login to the backend administrator site.">Admin Login</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.login.admin][1]" id="jform_rules_core.login.admin_1" title="Allow or deny Admin Login for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+					
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.login.offline_1" class="hasTooltip" title="" data-original-title="Offline Access Allows users in the group to access to the frontend site when site is offline.">Offline Access</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.login.offline][1]" id="jform_rules_core.login.offline_1" title="Allow or deny Offline Access for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.admin_1" class="hasTooltip" title="" data-original-title="Super User Allows users in the group to perform any action over the whole site regardless of any other permission settings.">Super User</label>
+						</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.admin][1]" id="jform_rules_core.admin_1" title="Allow or deny Super User for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.manage_1" class="hasTooltip" title="" data-original-title="Access Administration Interface Allows users in the group to access all of the administration interface except Global Configuration">Access Administration Interface</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.manage][1]" id="jform_rules_core.manage_1" title="Allow or deny Access Administration Interface for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.create_1" class="hasTooltip" title="" data-original-title="Create Allows users in the group to create any content in any extension.">Create</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.create][1]" id="jform_rules_core.create_1" title="Allow or deny Create for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						 
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.delete_1" class="hasTooltip" title="" data-original-title="Delete Allows users in the group to delete any content in any extension.">Delete</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.delete][1]" id="jform_rules_core.delete_1" title="Allow or deny Delete for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						 
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.edit_1" class="hasTooltip" title="" data-original-title="Edit Allows users in the group to edit any content in any extension">Edit</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.edit][1]" id="jform_rules_core.edit_1" title="Allow or deny Edit for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						 
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.edit.state_1" class="hasTooltip" title="" data-original-title="Edit State Allows users in the group to edit the state of any content in any extension">Edit State</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.edit.state][1]" id="jform_rules_core.edit.state_1" title="Allow or deny Edit State for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th1">
+						<label for="jform_rules_core.edit.own_1" class="hasTooltip" title="" data-original-title="Edit Own Allows users in the group to edit any content they own in any extension">Edit Own</label>
+					</td>
+					<td headers="settings-th1">
+						<select class="input-small chzn-done" name="jform[rules][core.edit.own][1]" id="jform_rules_core.edit.own_1" title="Allow or deny Edit Own for users in the Public group" style="display: none;">
+							<option value="" selected="selected">Not Set</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="tab-pane" id="permission-9">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="actions" id="actions-th9"><span class="acl-action">Action</span></th>
+					<th class="settings" id="settings-th9"><span class="acl-action">Select New Setting <sup>1</sup></span></th>
+					<th id="aclactionth9"><span class="acl-action">Calculated Setting <sup>2</sup></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td headers="actions-th9">
+						<label for="jform_rules_core.login.site_9" class="hasTooltip" title="" data-original-title="Site Login Allows users in the group to login to the frontend site.">Site Login</label>
+					</td>
+					<td headers="settings-th9">
+						<select class="input-small chzn-done" name="jform[rules][core.login.site][9]" id="jform_rules_core.login.site_9" title="Allow or deny Site Login for users in the Guest group" style="display: none;">
+							<option value="" selected="selected">Inherited</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						&nbsp; 
+					</td>
+					<td headers="aclactionth9"><span class="label label-important">Not Allowed</span></td>
+				</tr>
+				<tr>
+					<td headers="actions-th9">
+						<label for="jform_rules_core.login.admin_9" class="hasTooltip" title="" data-original-title="Admin Login Allows users in the group to login to the backend administrator site.">Admin Login</label>
+					</td>
+					<td headers="settings-th9">
+						<select class="input-small chzn-done" name="jform[rules][core.login.admin][9]" id="jform_rules_core.login.admin_9" title="Allow or deny Admin Login for users in the Guest group" style="display: none;">
+							<option value="" selected="selected">Inherited</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+						
+					</td>
+					<td headers="aclactionth9"><span class="label label-important">Not Allowed</span></td>
+				</tr>
+				<tr>
+					<td headers="actions-th9">
+						<label for="jform_rules_core.login.offline_9" class="hasTooltip" title="" data-original-title="Offline Access Allows users in the group to access to the frontend site when site is offline.">Offline Access</label>
+					</td>
+					<td headers="settings-th9">
+						<select class="input-small chzn-done" name="jform[rules][core.login.offline][9]" id="jform_rules_core.login.offline_9" title="Allow or deny Offline Access for users in the Guest group" style="display: none;">
+							<option value="" selected="selected">Inherited</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth9">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th9">
+						<label for="jform_rules_core.admin_9" class="hasTooltip" title="" data-original-title="Super User Allows users in the group to perform any action over the whole site regardless of any other permission settings.">Super User</label>
+					</td>
+					<td headers="settings-th9">
+						<select class="input-small chzn-done" name="jform[rules][core.admin][9]" id="jform_rules_core.admin_9" title="Allow or deny Super User for users in the Guest group" style="display: none;">
+							<option value="" selected="selected">Inherited</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth9">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th9">
+						<label for="jform_rules_core.delete_9" class="hasTooltip" title="" data-original-title="Delete Allows users in the group to delete any content in any extension.">Delete</label>
+					</td>
+					<td headers="settings-th9">
+						<select class="input-small chzn-done" name="jform[rules][core.delete][9]" id="jform_rules_core.delete_9" title="Allow or deny Delete for users in the Guest group" style="display: none;">
+							<option value="" selected="selected">Inherited</option>
+							<option value="1">Allowed</option>
+							<option value="0">Denied</option>
+						</select>
+											</td>
+					<td headers="aclactionth9">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th9">
+						<label for="jform_rules_core.edit.own_9" class="hasTooltip" title="" data-original-title="Edit Own Allows users in the group to edit any content they own in any extension">
+						Edit Own
+						</label>
+					</td>
+					<td headers="settings-th9">
+						<select class="input-small chzn-done" name="jform[rules][core.edit.own][9]" id="jform_rules_core.edit.own_9" title="Allow or deny Edit Own for users in the Guest group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth9">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="tab-pane" id="permission-3">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th class="actions" id="actions-th3"><span class="acl-action">Action</span></th>
+					<th class="settings" id="settings-th3"><span class="acl-action">Select New Setting <sup>1</sup></span></th>
+					<th id="aclactionth3"><span class="acl-action">Calculated Setting <sup>2</sup></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.login.site_3" class="hasTooltip" title="" data-original-title="Site Login Allows users in the group to login to the frontend site.">
+						Site Login
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.login.site][3]" id="jform_rules_core.login.site_3" title="Allow or deny Site Login for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-success">Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.login.admin_3" class="hasTooltip" title="" data-original-title="Admin Login Allows users in the group to login to the backend administrator site.">
+						Admin Login
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.login.admin][3]" id="jform_rules_core.login.admin_3" title="Allow or deny Admin Login for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.login.offline_3" class="hasTooltip" title="" data-original-title="Offline Access Allows users in the group to access to the frontend site when site is offline.">
+						Offline Access
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.login.offline][3]" id="jform_rules_core.login.offline_3" title="Allow or deny Offline Access for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.admin_3" class="hasTooltip" title="" data-original-title="Super User Allows users in the group to perform any action over the whole site regardless of any other permission settings.">
+						Super User
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.admin][3]" id="jform_rules_core.admin_3" title="Allow or deny Super User for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.manage_3" class="hasTooltip" title="" data-original-title="Access Administration Interface Allows users in the group to access all of the administration interface except Global Configuration">
+						Access Administration Interface
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.manage][3]" id="jform_rules_core.manage_3" title="Allow or deny Access Administration Interface for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select> 
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.create_3" class="hasTooltip" title="" data-original-title="Create Allows users in the group to create any content in any extension.">
+						Create
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.create][3]" id="jform_rules_core.create_3" title="Allow or deny Create for users in the Author group" style="display: none;">
+						<option value="">Inherited</option>
+						<option value="1" selected="selected">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-success">Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.delete_3" class="hasTooltip" title="" data-original-title="Delete Allows users in the group to delete any content in any extension.">
+						Delete
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.delete][3]" id="jform_rules_core.delete_3" title="Allow or deny Delete for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.edit_3" class="hasTooltip" title="" data-original-title="Edit Allows users in the group to edit any content in any extension">
+						Edit
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.edit][3]" id="jform_rules_core.edit_3" title="Allow or deny Edit for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.edit.state_3" class="hasTooltip" title="" data-original-title="Edit State Allows users in the group to edit the state of any content in any extension">
+						Edit State
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.edit.state][3]" id="jform_rules_core.edit.state_3" title="Allow or deny Edit State for users in the Author group" style="display: none;">
+						<option value="" selected="selected">Inherited</option>
+						<option value="1">Allowed</option>
+						<option value="0">Denied</option>
+						</select> 
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-important">Not Allowed</span>
+					</td>
+				</tr>
+				<tr>
+					<td headers="actions-th3">
+						<label for="jform_rules_core.edit.own_3" class="hasTooltip" title="" data-original-title="Edit Own Allows users in the group to edit any content they own in any extension">
+						Edit Own
+						</label>
+					</td>
+					<td headers="settings-th3">
+						<select class="input-small chzn-done" name="jform[rules][core.edit.own][3]" id="jform_rules_core.edit.own_3" title="Allow or deny Edit Own for users in the Author group" style="display: none;">
+						<option value="">Inherited</option>
+						<option value="1" selected="selected">Allowed</option>
+						<option value="0">Denied</option>
+						</select>
+					</td>
+					<td headers="aclactionth3">
+						<span class="label label-success">Allowed</span>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="tab-pane" id="permission-8">
+		<table class="table table-striped">
+		<thead>
+		<tr>
+		<th class="actions" id="actions-th8">
+		<span class="acl-action">Action</span>
+		</th>
+		<th class="settings" id="settings-th8">
+		<span class="acl-action">Select New Setting <sup>1</sup></span>
+		</th>
+		<th id="aclactionth8">
+		<span class="acl-action">Calculated Setting <sup>2</sup></span>
+		</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.login.site_8" class="hasTooltip" title="" data-original-title="Site Login Allows users in the group to login to the frontend site.">
+		Site Login
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.login.site][8]" id="jform_rules_core.login.site_8" title="Allow or deny Site Login for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select> 
+		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.login.admin_8" class="hasTooltip" title="" data-original-title="Admin Login Allows users in the group to login to the backend administrator site.">
+		Admin Login
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.login.admin][8]" id="jform_rules_core.login.admin_8" title="Allow or deny Admin Login for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>
+		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.login.offline_8" class="hasTooltip" title="" data-original-title="Offline Access Allows users in the group to access to the frontend site when site is offline.">
+		Offline Access
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.login.offline][8]" id="jform_rules_core.login.offline_8" title="Allow or deny Offline Access for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>
+		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.admin_8" class="hasTooltip" title="" data-original-title="Super User Allows users in the group to perform any action over the whole site regardless of any other permission settings.">
+		Super User
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.admin][8]" id="jform_rules_core.admin_8" title="Allow or deny Super User for users in the Super Users group" style="display: none;">
+		<option value="">Inherited</option>
+		<option value="1" selected="selected">Allowed</option>
+		<option value="0">Denied</option>
+		</select>
+		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success">Allowed</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.manage_8" class="hasTooltip" title="" data-original-title="Access Administration Interface Allows users in the group to access all of the administration interface except Global Configuration">
+		Access Administration Interface
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.manage][8]" id="jform_rules_core.manage_8" title="Allow or deny Access Administration Interface for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>
+		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.create_8" class="hasTooltip" title="" data-original-title="Create Allows users in the group to create any content in any extension.">
+		Create
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.create][8]" id="jform_rules_core.create_8" title="Allow or deny Create for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.delete_8" class="hasTooltip" title="" data-original-title="Delete Allows users in the group to delete any content in any extension.">
+		Delete
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.delete][8]" id="jform_rules_core.delete_8" title="Allow or deny Delete for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.edit_8" class="hasTooltip" title="" data-original-title="Edit Allows users in the group to edit any content in any extension">
+		Edit
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.edit][8]" id="jform_rules_core.edit_8" title="Allow or deny Edit for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.edit.state_8" class="hasTooltip" title="" data-original-title="Edit State Allows users in the group to edit the state of any content in any extension">
+		Edit State
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.edit.state][8]" id="jform_rules_core.edit.state_8" title="Allow or deny Edit State for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>
+		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		<tr>
+		<td headers="actions-th8">
+		<label for="jform_rules_core.edit.own_8" class="hasTooltip" title="" data-original-title="Edit Own Allows users in the group to edit any content they own in any extension">
+		Edit Own
+		</label>
+		</td>
+		<td headers="settings-th8">
+		<select class="input-small chzn-done" name="jform[rules][core.edit.own][8]" id="jform_rules_core.edit.own_8" title="Allow or deny Edit Own for users in the Super Users group" style="display: none;">
+		<option value="" selected="selected">Inherited</option>
+		<option value="1">Allowed</option>
+		<option value="0">Denied</option>
+		</select>		</td>
+		<td headers="aclactionth8">
+		<span class="label label-success"><i class="icon-lock icon-white"></i> Allowed (Super User)</span>
+		</td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+	</div>
+	</div>
+	<div class="alert">
+	1. If you change the setting, it will apply to this and all child groups, components and content. Note that:<br> <em>Inherited</em> means that the permissions from the parent group will be used.<br> <em>Denied</em> means that no matter what the parent group's setting is, the group being edited cannot take this action.<br> <em>Allowed</em> means that the group being edited will be able to take this action (but if this is in conflict with the parent group it will have no impact; a conflict will be indicated by <em>Not Allowed (Locked)</em> under Calculated Settings).<br> <em>Not Set</em> is used only for the Public group in global configuration. The Public group is the parent of all other groups. If a permission is not set, it is treated as deny but can be changed for child groups, components, categories and items.<br>2. If you select a new setting, click <em>Save</em> to refresh the calculated settings.
+	</div>
+	</div>
+	</div>
+</fieldset>
+</div>
+</div>
+<div id="page-filters" class="tab-pane">
+<div class="row-fluid">
+<fieldset class="form-vertical">
+	<legend>Text Filter Settings</legend>
+	<p>These text filter settings will be applied to all text editor fields submitted by users in the selected groups.<br>These filtering options give more control over the HTML your content providers submit. You can be as strict or as liberal as you require to suit your site needs. The filtering is opt-in and the default settings provide good protection against markup commonly associated with Web site attacks.</p>
+	<div class="control-group">
+	<div class="controls">
+		<table id="filter-config" class="table table-striped">
+			<thead>
+				<tr>
+					<th><span class="acl-action">Filter Groups</span></th>
+					<th><span class="acl-action" title="Filter Type<sup>1</sup>">Filter Type<sup>1</sup></span></th>
+					<th><span class="acl-action" title="Filter Tags<sup>2</sup>">Filter Tags<sup>2</sup></span></th>
+					<th><span class="acl-action" title="Filter Attributes<sup>3</sup>">Filter Attributes<sup>3</sup></span></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th class="acl-groups left">Public</th>
+					<td>
+						<select name="jform[filters][1][filter_type]" id="jform_filters1_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH" selected="selected">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+					</td>
+					<td>
+						<input name="jform[filters][1][filter_tags]" id="jform_filters1_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][1][filter_attributes]" id="jform_filters1_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span>Guest</th>
+					<td>
+						<select name="jform[filters][9][filter_type]" id="jform_filters9_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL" selected="selected">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][9][filter_tags]" id="jform_filters9_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][9][filter_attributes]" id="jform_filters9_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span>Manager</th>
+					<td>
+						<select name="jform[filters][6][filter_type]" id="jform_filters6_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL" selected="selected">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][6][filter_tags]" id="jform_filters6_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][6][filter_attributes]" id="jform_filters6_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span><span class="gi">|—</span>Administrator</th>
+					<td>
+						<select name="jform[filters][7][filter_type]" id="jform_filters7_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE" selected="selected">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][7][filter_tags]" id="jform_filters7_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][7][filter_attributes]" id="jform_filters7_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span>Registered</th>
+					<td>
+						<select name="jform[filters][2][filter_type]" id="jform_filters2_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH" selected="selected">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][2][filter_tags]" id="jform_filters2_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][2][filter_attributes]" id="jform_filters2_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span><span class="gi">|—</span>Author</th>
+					<td>
+						<select name="jform[filters][3][filter_type]" id="jform_filters3_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL" selected="selected">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+					</td>
+					<td>
+						<input name="jform[filters][3][filter_tags]" id="jform_filters3_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][3][filter_attributes]" id="jform_filters3_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span><span class="gi">|—</span><span class="gi">|—</span>Editor</th>
+					<td>
+						<select name="jform[filters][4][filter_type]" id="jform_filters4_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL" selected="selected">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][4][filter_tags]" id="jform_filters4_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][4][filter_attributes]" id="jform_filters4_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span><span class="gi">|—</span><span class="gi">|—</span><span class="gi">|—</span>Publisher</th>
+					<td>
+						<select name="jform[filters][5][filter_type]" id="jform_filters5_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL" selected="selected">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][5][filter_tags]" id="jform_filters5_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][5][filter_attributes]" id="jform_filters5_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+				<tr>
+					<th class="acl-groups left"><span class="gi">|—</span>Super Users</th>
+					<td>
+						<select name="jform[filters][8][filter_type]" id="jform_filters8_filter_type" class="chzn-done" style="display: none;">
+						<option value="BL">Default Black List</option>
+						<option value="CBL">Custom Black List</option>
+						<option value="WL">White List</option>
+						<option value="NH">No HTML</option>
+						<option value="NONE" selected="selected">No Filtering</option>
+						</select>
+						
+					</td>
+					<td>
+						<input name="jform[filters][8][filter_tags]" id="jform_filters8_filter_tags" title="Filter Tags<sup>2</sup>" value="">
+					</td>
+					<td>
+						<input name="jform[filters][8][filter_attributes]" id="jform_filters8_filter_attributes" title="Filter Attributes<sup>3</sup>" value="">
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="alert">
+			<p>1. Black List allows all tags and attributes except for those in the black list.<br><strong>--</strong> Tags for the Default Black List include: 'applet', 'body', 'bgsound', 'base', 'basefont', 'embed', 'frame', 'frameset', 'head', 'html', 'id', 'iframe', 'ilayer', 'layer', 'link', 'meta', 'name', 'object', 'script', 'style', 'title', 'xml'<br><strong>--</strong> Attributes for the Default Black List include: 'action', 'background', 'codebase', 'dynsrc', 'lowsrc'<br><strong>--</strong> You can black list additional tags and attributes by adding to the Filter Tags and Filter Attributes fields, separating each tag or attribute name with a comma.<br><strong>--</strong> Custom Black List allows you to override the Default Black List. Add the tags and attributes to be black listed in the Filter Tags and Filter Attributes fields.</p><p>White List allows only the tags listed in the Filter Tags and Filter Attributes fields.</p><p>No HTML removes all HTML tags from the content when it is saved.</p><p>Please note that these settings work regardless of the editor that you are using. <br>Even if you are using a WYSIWYG editor, the filtering settings may strip additional tags and attributes prior to saving information in the database.</p>
+			<p>2. List additional tags, separating each tag name with a space or comma. For example: <i>p,div,span</i></p>
+			<p>3. List additional attributes, separating each attribute name with a space or comma. For example: <i>class,title,id</i></p>
+		</div>
+	</div>
+	</div>
+</fieldset>
+</div>
+</div>
+
+</div>
+</div>
+<!-- End Content -->
+</div>
+
+</div>
+</div>
+<!-- End Content -->
+</section>
+
+</div>
+<!-- Begin Status Module -->
+<div id="status" class="navbar navbar-fixed-bottom hidden-phone">
+	<div class="btn-toolbar">
+		<div class="btn-group pull-right">
+			<p>© 2014 Testing Admin</p>
+		</div>
+		<div class="btn-group viewsite">
+			<a href="http://localjoomla/" target="_blank"><i class="icon-share-alt"></i> View Site</a>
+		</div>
+		<div class="btn-group divider"></div>
+		<div class="btn-group loggedin-users"><span class="badge">0</span> Visitors</div>
+		<div class="btn-group backloggedin-users"><span class="badge">1</span> Admin</div>
+		<div class="btn-group hasTooltip no-unread-messages" title="" data-original-title="0 Messages"><a href="#"><i class="icon-envelope"></i> <span class="badge">0</span></a>
+			<div class="btn-group divider"></div>
+		</div>
+		<div class="btn-group logout"><a href="#"><i class="icon-minus-2"></i> Log out</a></div>
+	</div>
+</div>
+<!-- End Status Module -->
+
+<script>
+(function($)
+{
+// fix sub nav on scroll
+var $win = $(window)
+, $nav    = $('.subhead')
+, navTop  = $('.subhead').length && $('.subhead').offset().top - 40
+, isFixed = 0
+
+processScroll()
+
+// hack sad times - holdover until rewrite for 2.1
+$nav.on('click', function()
+{
+if (!isFixed) {
+setTimeout(function()
+{
+$win.scrollTop($win.scrollTop() - 47)
+}, 10)
+}
+})
+
+$win.on('scroll', processScroll)
+
+function processScroll()
+{
+var i, scrollTop = $win.scrollTop()
+if (scrollTop >= navTop && !isFixed) {
+isFixed = 1
+$nav.addClass('subhead-fixed')
+} else if (scrollTop <= navTop && isFixed) {
+isFixed = 0
+$nav.removeClass('subhead-fixed')
+}
+}
+})(jQuery);
+</script>
+
+
+</body>
+</html>
