@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-gb" lang="en-gb" dir="ltr">
+<head>
+	  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Joomla! - Open Source Content Management">
+  <title>Insert Image</title>
+  <link href="/administrator/templates/isis/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon">
+  <link rel="stylesheet" href="assets/css/popup-imagemanager.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/chosen.css" type="text/css">
+  <link rel="stylesheet" href="assets/css/template.css" type="text/css">
+  <script src="assets/js/jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/jquery-noconflict.js" type="text/javascript"></script>
+  <script src="assets/js/jquery-migrate.min.js" type="text/javascript"></script>
+  <script src="assets/js/mootools-core.js" type="text/javascript"></script>
+  <script src="assets/js/core.js" type="text/javascript"></script>
+  <script src="assets/js/popup-imagemanager.js" type="text/javascript"></script>
+  <script src="assets/js/chosen.jquery.min.js" type="text/javascript"></script>
+  <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="assets/js/template.js" type="text/javascript"></script>
+  <script type="text/javascript">
+
+	jQuery(document).ready(function (){
+		jQuery('select').chosen({"disable_search_threshold":10,"allow_single_deselect":true,"placeholder_text_multiple":"Select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
+	});
+			
+	jQuery(document).ready(function(){
+		jQuery('.noHtmlTip').tooltip({"html": false,"container": "body"});
+	});
+  </script>
+
+	<!--[if lt IE 9]>
+		<script src="..assets/js/html5.js"></script>
+	<![endif]-->
+</head>
+<body class="contentpane component">
+	<div id="system-message-container">
+	</div>
+
+	<script type="text/javascript">
+var image_base_path = 'images/';
+</script>
+<form action="#" class="form-vertical" id="imageForm" method="post" enctype="multipart/form-data">
+	<div id="messages" style="display: none;">
+		<span id="message"></span><img src="assets/images/dots.gif" alt="..." width="22" height="12">	</div>
+	<div class="well">
+		<div class="row">
+			<div class="span9 control-group">
+				<div class="control-label">
+					<label class="control-label" for="folder">Directory</label>
+				</div>
+				<div class="controls">
+					<select id="folderlist" name="folderlist" size="1" onchange="ImageManager.setFolder(this.options[this.selectedIndex].value, 1, 0)" class="chzn-done" style="display: none;">
+	<option value="">/</option>
+	<option value="banners">/banners</option>
+	<option value="headers">/headers</option>
+	<option value="sampledata">/sampledata</option>
+	<option value="sampledata/fruitshop">/sampledata/fruitshop</option>
+	<option value="sampledata/parks">/sampledata/parks</option>
+	<option value="sampledata/parks/animals">/sampledata/parks/animals</option>
+	<option value="sampledata/parks/landscape">/sampledata/parks/landscape</option>
+</select>
+					<button class="btn" type="button" id="upbutton" title="Directory Up">Up</button>
+				</div>
+			</div>
+			<div class="pull-right">
+				<button class="btn btn-primary" type="button" onclick="window.parent.jInsertFieldValue(document.id('f_url').value,'jform_offline_image');window.parent.SqueezeBox.close();">Insert</button>
+				<button class="btn" type="button" onclick="window.parent.SqueezeBox.close();">Cancel</button>
+			</div>
+		</div>
+	</div>
+
+	<iframe id="imageframe" name="imageframe" src="index.php?option=com_media&amp;view=imagesList&amp;tmpl=component&amp;folder=&amp;asset=1&amp;author="></iframe>
+
+	<div class="well">
+		<div class="row">
+			<div class="span6 control-group">
+				<div class="control-label">
+					<label for="f_url">Image URL</label>
+				</div>
+				<div class="controls">
+					<input type="text" id="f_url" value="">
+				</div>
+			</div>
+					</div>
+		
+		<input type="hidden" id="dirPath" name="dirPath">
+		<input type="hidden" id="f_file" name="f_file">
+		<input type="hidden" id="tmpl" name="component">
+
+	</div>
+</form>
+
+	<form action="#" id="uploadForm" class="form-horizontal" name="uploadForm" method="post" enctype="multipart/form-data">
+		<div id="uploadform" class="well">
+			<fieldset id="upload-noflash" class="actions">
+				<div class="control-group">
+					<div class="control-label">
+						<label for="upload-file" class="control-label">Upload file</label>
+					</div>
+					<div class="controls">
+						<input type="file" id="upload-file" name="Filedata[]" multiple=""><button class="btn btn-primary" id="upload-submit"><i class="icon-upload icon-white"></i> Start Upload</button>
+						<p class="help-block">Upload files (Maximum Size: 10 MB)</p>
+					</div>
+				</div>
+			</fieldset>
+					</div>
+	</form>
+
+
+
+</body>
+</html>

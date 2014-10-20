@@ -19,21 +19,20 @@ html { display:none }
   <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
   <script src="assets/js/chosen.jquery.min.js" type="text/javascript"></script>
   <script type="text/javascript">
-jQuery(function () {if (top == self) {document.documentElement.style.display = 'block'; } else {top.location = self.location; }});
-window.setInterval(function(){var r;try{r=window.XMLHttpRequest?new XMLHttpRequest():new ActiveXObject("Microsoft.XMLHTTP")}catch(e){}if(r){r.open("GET","./",true);r.send(null)}},840000);
-jQuery(document).ready(function(){
-	jQuery('.hasTooltip').tooltip({"html": true,"container": "body"});
-});
-				jQuery(document).ready(function (){
-					jQuery('.advancedSelect').chosen({"disable_search_threshold":10,"allow_single_deselect":true,"placeholder_text_multiple":"Select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
-				});
+	jQuery(function () {if (top == self) {document.documentElement.style.display = 'block'; } else {top.location = self.location; }});
+	jQuery(document).ready(function(){
+		jQuery('.hasTooltip').tooltip({"html": true,"container": "body"});
+	});
+					jQuery(document).ready(function (){
+						jQuery('.advancedSelect').chosen({"disable_search_threshold":10,"allow_single_deselect":true,"placeholder_text_multiple":"Select some options","placeholder_text_single":"Select an option","no_results_text":"No results match"});
+	});
 			
   </script>
 
 	<script type="text/javascript">
-       	    jQuery(function($) {
-            	$( "#form-login input[name='username']" ).focus();
-            });
+   	    jQuery(function($) {
+        	$( "#form-login input[name='username']" ).focus();
+        });
 	</script>
 	<style type="text/css">
 		/* Responsive Styles */
@@ -60,58 +59,55 @@ jQuery(document).ready(function(){
 			<div id="element-box" class="login well">
 				<img src="assets/images/joomla.png" alt="Joomla!">
 				<hr>
-				<div id="system-message-container">
-	</div>
-
-				<form action="/administrator/index.php" method="post" id="form-login" class="form-inline">
-	<fieldset class="loginform">
-		<div class="control-group">
-			<div class="controls">
-				<div class="input-prepend input-append">
-					<span class="add-on">
-						<i class="icon-user hasTooltip" title="" data-original-title="Username"></i>
-						<label for="mod-login-username" class="element-invisible">
-							Username						</label>
-					</span>
-					<input name="username" tabindex="1" id="mod-login-username" type="text" class="input-medium" placeholder="Username" size="15">
-					<a href="http://localjoomla/index.php?option=com_users&amp;view=remind" class="btn width-auto hasTooltip" title="" data-original-title="Forgot your username?">
-						<i class="icon-help"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-		<div class="control-group">
-			<div class="controls">
-				<div class="input-prepend input-append">
-					<span class="add-on">
-						<i class="icon-lock hasTooltip" title="" data-original-title="Password"></i>
-						<label for="mod-login-password" class="element-invisible">
-							Password						</label>
-					</span>
-					<input name="passwd" tabindex="2" id="mod-login-password" type="password" class="input-medium" placeholder="Password" size="15">
-					<a href="http://localjoomla/index.php?option=com_users&amp;view=reset" class="btn width-auto hasTooltip" title="" data-original-title="Forgot your password?">
-						<i class="icon-help"></i>
-					</a>
-				</div>
-			</div>
-		</div>
+				<div id="system-message-container"></div>
+				<form action="/dashboard.html" method="post" id="form-login" class="form-inline">
+					<fieldset class="loginform">
 						<div class="control-group">
-			<div class="controls">
-				<div class="btn-group pull-left">
-					<button tabindex="3" class="btn btn-primary btn-large">
-						<i class="icon-lock icon-white"></i> Log in					</button>
-				</div>
-			</div>
-		</div>
-		<input type="hidden" name="option" value="com_login">
-		<input type="hidden" name="task" value="login">
-		<input type="hidden" name="return" value="aW5kZXgucGhw">
-		<input type="hidden" name="f6e7a6c9633db325d00408b0451daf51" value="1">	</fieldset>
-</form>
+							<div class="controls">
+								<div class="input-prepend input-append">
+									<span class="add-on">
+										<i class="icon-user hasTooltip" title="" data-original-title="Username"></i>
+										<label for="mod-login-username" class="element-invisible">
+											Username						</label>
+									</span>
+									<input name="username" tabindex="1" id="mod-login-username" type="text" class="input-medium" placeholder="Username" size="15">
+									<a href="#" class="btn width-auto hasTooltip" title="" data-original-title="Forgot your username?">
+										<i class="icon-help"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+						<div class="control-group">
+							<div class="controls">
+								<div class="input-prepend input-append">
+									<span class="add-on">
+										<i class="icon-lock hasTooltip" title="" data-original-title="Password"></i>
+										<label for="mod-login-password" class="element-invisible">
+											Password						</label>
+									</span>
+									<input name="passwd" tabindex="2" id="mod-login-password" type="password" class="input-medium" placeholder="Password" size="15">
+									<a href="#" class="btn width-auto hasTooltip" title="" data-original-title="Forgot your password?">
+										<i class="icon-help"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+										<div class="control-group">
+							<div class="controls">
+								<div class="btn-group pull-left">
+									<button tabindex="3" class="btn btn-primary btn-large">
+										<i class="icon-lock icon-white"></i> Log in					</button>
+								</div>
+							</div>
+						</div>
+						<input type="hidden" name="option" value="com_login">
+						<input type="hidden" name="task" value="login">
+						<input type="hidden" name="return" value="aW5kZXgucGhw">
+						<input type="hidden" name="f6e7a6c9633db325d00408b0451daf51" value="1">	</fieldset>
+				</form>
 
 			</div>
-			<noscript>
-				Warning! JavaScript must be enabled for proper operation of the Administrator backend.			</noscript>
+			<noscript>Warning! JavaScript must be enabled for proper operation of the Administrator backend.</noscript>
 			<!-- End Content -->
 		</div>
 	</div>
@@ -124,4 +120,5 @@ jQuery(document).ready(function(){
 	
 
 
-</body></html>
+</body>
+</html>
